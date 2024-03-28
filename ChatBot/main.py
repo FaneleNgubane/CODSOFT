@@ -1,23 +1,19 @@
 from transformers import GPT2LMHeadModel, GPT2Tokenizer
 
 def load_model_and_tokenizer():
-    # Load pre-trained GPT model and tokenizer
     tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
     model = GPT2LMHeadModel.from_pretrained("gpt2", pad_token_id=tokenizer.eos_token_id)
     return tokenizer, model
 
 def generate_response(tokenizer, model, user_input):
-    # Tokenize input text
     input_ids = tokenizer.encode(user_input, return_tensors="pt")
     
-    # Generate response
     output = model.generate(input_ids, max_length=100, num_return_sequences=1, no_repeat_ngram_size=2, pad_token_id=tokenizer.eos_token_id)
     
-    # Decode and return the generated response
     return tokenizer.decode(output[0], skip_special_tokens=True)
 
 def rule_based_response(user_input):
-    user_input = user_input.lower()  # Convert user input to lowercase for easier matching
+    user_input = user_input.lower() 
     
     if "hello" in user_input or "hi" in user_input:
         return "Hello! How can I assist you today?"
@@ -32,8 +28,8 @@ def rule_based_response(user_input):
         return "You're welcome!"
     
     else:
-        return None  # Return None if no rule matches
-
+        return None 
+    
 def chat():
     tokenizer, model = load_model_and_tokenizer()
     print("Welcome to the ChatBot! You can start chatting. Type 'bye' to exit.")
