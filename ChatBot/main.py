@@ -21,9 +21,10 @@ def rule_based_response(user_input):
     elif "how are you" in user_input:
         return "I'm just a bot, but thanks for asking!"
     
-    elif "bye" in user_input:
+    elif "bye" in user_input or "exit" in user_input or "quit" in user_input:
         return "Goodbye! Have a great day!"
-    
+    elif "help" in user_input:
+        return "I can help you with a variety of queries. How can I assist you today?"  
     elif "thanks" in user_input or "thank you" in user_input:
         return "You're welcome!"
     
@@ -35,11 +36,11 @@ def chat():
     print("Welcome to the ChatBot! You can start chatting. Type 'bye' to exit.")
     while True:
         user_input = input("You: ")
-        if user_input.lower() == 'bye':
+        if user_input.lower() == 'bye' or user_input.lower() == 'quit' or user_input.lower() == 'exit':
             print("Bot: Goodbye! Have a great day!")
             break
         else:
-            # First, check if there's a rule-based response
+            # First, check if there's a rule-based responsea
             response = rule_based_response(user_input)
             if response:
                 print("Bot:", response)
